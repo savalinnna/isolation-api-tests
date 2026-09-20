@@ -1,8 +1,9 @@
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
-from tests.tools.config.grpc import GRPCClientTestConfig
-from tests.tools.config.http import HTTPClientTestConfig
+from tests.tools.config.grpc import GRPCClientTestConfig, GRPCServerTestConfig
+from tests.tools.config.http import HTTPClientTestConfig, HTTPServerTestConfig
 from tests.tools.config.kafka import KafkaClientTestConfig
+from tests.tools.config.postgres import PostgresClientTestConfig
 
 
 class TestSettings(BaseSettings):
@@ -20,12 +21,16 @@ class TestSettings(BaseSettings):
         env_nested_delimiter=".",
     )
 
+    mock_http_server: HTTPServerTestConfig
+    mock_grpc_server: GRPCServerTestConfig
+
     gateway_http_client: HTTPClientTestConfig
     gateway_grpc_client: GRPCClientTestConfig
 
     operations_http_client: HTTPClientTestConfig
     operations_grpc_client: GRPCClientTestConfig
     operations_kafka_client: KafkaClientTestConfig
+    operations_postgres_client: PostgresClientTestConfig
 
     operations_processing_wait_timeout: float
     """
